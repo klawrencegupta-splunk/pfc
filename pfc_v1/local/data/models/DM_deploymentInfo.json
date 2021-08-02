@@ -1,0 +1,189 @@
+{
+    "modelName": "DM_deploymentInfo",
+    "displayName": "DM_deploymentInfo",
+    "description": "",
+    "objectSummary": {
+        "Event-Based": 0,
+        "Transaction-Based": 0,
+        "Search-Based": 1
+    },
+    "objects": [
+        {
+            "objectName": "deploymentInfo",
+            "displayName": "deploymentInfo",
+            "parentName": "BaseSearch",
+            "comment": "",
+            "fields": [
+                {
+                    "fieldName": "host",
+                    "owner": "deploymentInfo",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "searchable_indexes",
+                    "owner": "deploymentInfo",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "searchable_indexes",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "site",
+                    "owner": "deploymentInfo",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "site",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "version",
+                    "owner": "deploymentInfo",
+                    "type": "number",
+                    "fieldSearch": "version=*",
+                    "required": true,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "version",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "origin_sh",
+                    "owner": "deploymentInfo",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "origin_sh",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "Peer_Count",
+                    "owner": "deploymentInfo",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "Peer_Count",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sourceHost",
+                    "owner": "deploymentInfo",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourceHost",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "customer",
+                            "owner": "deploymentInfo",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "customer",
+                            "comment": "",
+                            "lookupOutputFieldName": "customer"
+                        },
+                        {
+                            "fieldName": "host_short_name",
+                            "owner": "deploymentInfo",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "host_short_name",
+                            "comment": "",
+                            "lookupOutputFieldName": "host_short_name"
+                        },
+                        {
+                            "fieldName": "role",
+                            "owner": "deploymentInfo",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "role",
+                            "comment": "",
+                            "lookupOutputFieldName": "role"
+                        }
+                    ],
+                    "calculationType": "Lookup",
+                    "lookupName": "host_role_lkp",
+                    "comment": "",
+                    "lookupInputs": [
+                        {
+                            "inputField": "host",
+                            "lookupField": "host"
+                        }
+                    ],
+                    "owner": "deploymentInfo",
+                    "calculationID": "vb3rhxj353m",
+                    "editable": true
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "index_count",
+                            "owner": "deploymentInfo",
+                            "type": "number",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "index_count",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "v1u20vfodh8",
+                    "owner": "deploymentInfo",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "mvcount(split(searchable_indexes,\",\"))-1"
+                }
+            ],
+            "constraints": [],
+            "lineage": "deploymentInfo",
+            "baseSearch": "index=pfc (sourcetype=splunkd_log AND site) OR (sourcetype=metrics_log sourceHost OR Peer_Count) OR (sourcetype=\"peers_csv\") OR (sourcetype=audit_log action=search \"search/jobs/\" NOT \"search/jobs/16*\") | rex field=_raw \"remote.(?<origin_sh>.{1,25})_subsearch\""
+        }
+    ],
+    "objectNameList": [
+        "deploymentInfo"
+    ]
+}
