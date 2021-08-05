@@ -1,0 +1,151 @@
+<form theme="dark">
+  <label>DM_resource_usage_view2</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="field2">
+      <label></label>
+      <default>
+        <earliest>0</earliest>
+        <latest></latest>
+      </default>
+    </input>
+    <input type="dropdown" token="customer" searchWhenChanged="true">
+      <label>Customer</label>
+      <fieldForLabel>customer</fieldForLabel>
+      <fieldForValue>customer</fieldForValue>
+      <search>
+        <query>| inputlookup host_role.csv |  fields customer | dedup customer</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <default>CustomerX</default>
+      <initialValue>CustomerX</initialValue>
+    </input>
+    <input type="dropdown" token="role" searchWhenChanged="true">
+      <label>Role</label>
+      <fieldForLabel>role</fieldForLabel>
+      <fieldForValue>role</fieldForValue>
+      <search>
+        <query>| inputlookup host_role.csv |  fields customer role | dedup role</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+    </input>
+    <input type="multiselect" token="host_short_name" searchWhenChanged="true">
+      <label>Hosts</label>
+      <fieldForLabel>host_short_name</fieldForLabel>
+      <fieldForValue>host_short_name</fieldForValue>
+      <search>
+        <query>| inputlookup host_role.csv | fields customer host_short_name role | search customer=$customer$ AND role=$role$ | fields host_short_name | dedup host_short_name</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <delimiter>  OR </delimiter>
+      <valuePrefix>DM_resourcelogdata.host_short_name=</valuePrefix>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Overall Health Status</title>
+      <table>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false median("DM_resourcelogdata.data.avg_total_ms") as STORAGE, min("DM_resourcelogdata.data.cpu_idle_pct") as CPU, max("DM_resourcelogdata.data.mem_perc_used") as MEM FROM datamodel=DM_resourcelogdata.DM_resourcelogdata WHERE (nodename=DM_resourcelogdata "DM_resourcelogdata.host_short_name"="*") BY "DM_resourcelogdata.host_short_name" | search $host_short_name$| stats dedup_splitvals=t median(DM_resourcelogdata.data.avg_total_ms) AS STORAGE min(DM_resourcelogdata.data.cpu_idle_pct) AS CPU max(DM_resourcelogdata.data.mem_perc_used) AS MEM by DM_resourcelogdata.host_short_name | sort limit=100 DM_resourcelogdata.host_short_name | fields - _span | rename "DM_resourcelogdata.host_short_name" as Host | fields + Host, STORAGE, CPU, MEM
+| eval cpu_contention_status=if(searchmatch("CPU&lt;30.00"),"CPU Contention Found", "CPU OK") 
+| eval high_memutil_status=if(searchmatch("MEM&gt;90.00"),"High Memory Utilization Found", "Memory OK") 
+| eval storage_contention_status=if(searchmatch("STORAGE&gt;10.00"),"Storage Contention Found", "Storage OK") | table  Host cpu_contention_status high_memutil_status storage_contention_status</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Memory Utilization</title>
+      <chart>
+        <title>% of utilization over time min|max represented</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false max("DM_resourcelogdata.data.mem_perc_used") as "max mem", min("DM_resourcelogdata.data.mem_perc_used") as "min mem" FROM datamodel=DM_resourcelogdata.DM_resourcelogdata WHERE (nodename=DM_resourcelogdata "DM_resourcelogdata.host_short_name"="*") BY _time span=1h DM_resourcelogdata.host_short_name | eval _time='_time' | search $host_short_name$ | chart dedup_splitvals=t max(DM_resourcelogdata.data.mem_perc_used) AS "max mem" over _time by DM_resourcelogdata.host_short_name</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>CPU Idle %</title>
+      <chart>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false min("DM_resourcelogdata.data.cpu_idle_pct") as "Min of data.cpu_idle_pct" FROM datamodel=DM_resourcelogdata.DM_resourcelogdata WHERE (nodename=DM_resourcelogdata "DM_resourcelogdata.host_short_name"="*") BY _time span=1h, "DM_resourcelogdata.host_short_name" | search $host_short_name$ | eval "DM_resourcelogdata.host_short_name"='DM_resourcelogdata.host_short_name', _time='_time' | timechart dedup_splitvals=t limit=100 useother=t min(DM_resourcelogdata.data.cpu_idle_pct) AS "Min of data.cpu_idle_pct" span=1h by "DM_resourcelogdata.host_short_name"</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsY.majorUnit">5</option>
+        <option name="charting.axisY.maximumNumber">100</option>
+        <option name="charting.axisY.minimumNumber">0</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>CPU Utilization</title>
+      <chart>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false max("DM_resourcelogdata.data.cpu_system_pct") as "Max of data.cpu_system_pct", max("DM_resourcelogdata.data.cpu_user_pct") as "Max of data.cpu_user_pct" FROM datamodel=DM_resourcelogdata.DM_resourcelogdata WHERE (nodename=DM_resourcelogdata "DM_resourcelogdata.host_short_name"="*") BY _time span=1h, "DM_resourcelogdata.host_short_name" | search $host_short_name$ | eval "DM_resourcelogdata.host_short_name"='DM_resourcelogdata.host_short_name', _time='_time' | timechart dedup_splitvals=t limit=100 useother=t max(DM_resourcelogdata.data.cpu_system_pct) AS "Max of data.cpu_system_pct" max(DM_resourcelogdata.data.cpu_user_pct) AS "Max of data.cpu_user_pct" span=1h by DM_resourcelogdata.host_short_name</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsY.majorUnit">5</option>
+        <option name="charting.axisY.maximumNumber">100</option>
+        <option name="charting.axisY.minimumNumber">0</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">top</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>IOwait by mount point</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false max("DM_resourcelogdata.data.avg_total_ms") as "Max of data.avg_total_ms" FROM datamodel=DM_resourcelogdata.DM_resourcelogdata WHERE (nodename=DM_resourcelogdata "DM_resourcelogdata.host_short_name"="*") BY _time span=1h, "DM_resourcelogdata.data.mount_point" "DM_resourcelogdata.host_short_name" | search $host_short_name$ | eval "DM_resourcelogdata.data.mount_point"='DM_resourcelogdata.data.mount_point', _time='_time' | chart max(DM_resourcelogdata.data.avg_total_ms) AS "Max of data.avg_total_ms" over DM_resourcelogdata.data.mount_point by "DM_resourcelogdata.host_short_name"</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Reads KBps | Writes KBps by CPU Utilization</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false max("DM_resourcelogdata.data.reads_kb_ps") as "Max of data.reads_kb_ps", max("DM_resourcelogdata.data.writes_kb_ps") as "Max of data.writes_kb_ps", max("DM_resourcelogdata.data.cpu_pct") as "Max of data.cpu_pct" FROM datamodel=DM_resourcelogdata.DM_resourcelogdata WHERE (nodename=DM_resourcelogdata "DM_resourcelogdata.host_short_name"="*") BY _time span=1h "DM_resourcelogdata.host_short_name" | search $host_short_name$ | eval _time='_time' | chart dedup_splitvals=t max(DM_resourcelogdata.data.reads_kb_ps) AS "Max of data.reads_kb_ps" max(DM_resourcelogdata.data.writes_kb_ps) AS "Max of data.writes_kb_ps" max(DM_resourcelogdata.data.cpu_pct) AS "Max of data.cpu_pct" span=1h over  _time by "DM_resourcelogdata.host_short_name"</query>
+          <earliest>$field2.earliest$</earliest>
+          <latest>$field2.latest$</latest>
+        </search>
+        <option name="charting.axisY.abbreviation">auto</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">linear</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.chart.showDataLabels">minmax</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+</form>

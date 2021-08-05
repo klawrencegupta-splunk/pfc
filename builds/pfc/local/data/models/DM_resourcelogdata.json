@@ -1,0 +1,367 @@
+{
+    "modelName": "DM_resourcelogdata",
+    "displayName": "DM_resourcelogdata",
+    "description": "",
+    "objectSummary": {
+        "Event-Based": 0,
+        "Transaction-Based": 0,
+        "Search-Based": 1
+    },
+    "objects": [
+        {
+            "objectName": "DM_resourcelogdata",
+            "displayName": "DM_resourcelogdata",
+            "parentName": "BaseSearch",
+            "comment": "",
+            "fields": [
+                {
+                    "fieldName": "current_size_kb",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "current_size_kb",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.avg_service_ms",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.avg_service_ms",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.avg_total_ms",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.avg_total_ms",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.cpu_idle_pct",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.cpu_idle_pct",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.cpu_pct",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.cpu_pct",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.cpu_system_pct",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.cpu_system_pct",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.cpu_user_pct",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.cpu_user_pct",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.device",
+                    "owner": "DM_resourcelogdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.device",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.mount_point",
+                    "owner": "DM_resourcelogdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.mount_point",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.reads_kb_ps",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.reads_kb_ps",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.writes_kb_ps",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.writes_kb_ps",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "max_size",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "max_size_kb",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.fs_type",
+                    "owner": "DM_resourcelogdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.fs_type",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.pct_cpu",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "DM_resourcelogdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "group",
+                    "owner": "DM_resourcelogdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "group",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "name",
+                    "owner": "DM_resourcelogdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "DM_resourcelogdata",
+                    "type": "timestamp",
+                    "fieldSearch": "_time=*",
+                    "required": true,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.mem",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.mem",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.mem_used",
+                    "owner": "DM_resourcelogdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.mem_used",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "customer",
+                            "owner": "DM_resourcelogdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "customer",
+                            "comment": "",
+                            "lookupOutputFieldName": "customer"
+                        },
+                        {
+                            "fieldName": "host_short_name",
+                            "owner": "DM_resourcelogdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "host_short_name",
+                            "comment": "",
+                            "lookupOutputFieldName": "host_short_name"
+                        },
+                        {
+                            "fieldName": "role",
+                            "owner": "DM_resourcelogdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "role",
+                            "comment": "",
+                            "lookupOutputFieldName": "role"
+                        }
+                    ],
+                    "calculationType": "Lookup",
+                    "lookupName": "host_role_lkp",
+                    "comment": "",
+                    "lookupInputs": [
+                        {
+                            "inputField": "host",
+                            "lookupField": "host"
+                        }
+                    ],
+                    "owner": "DM_resourcelogdata",
+                    "calculationID": "qgvcdiqtwfb",
+                    "editable": true
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "data.mem_perc_used",
+                            "owner": "DM_resourcelogdata",
+                            "type": "number",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "Memory % used",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "sb1yqbvxyze",
+                    "owner": "DM_resourcelogdata",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round('data.mem_used'/'data.mem' * 100,2)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "q_perc_filled",
+                            "owner": "DM_resourcelogdata",
+                            "type": "number",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "q_perc_filled",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "uvrpzwrgp58",
+                    "owner": "DM_resourcelogdata",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round(current_size_kb/max_size_kb*100,2)"
+                }
+            ],
+            "constraints": [],
+            "lineage": "DM_resourcelogdata",
+            "baseSearch": "index=pfc (sourcetype=resource_usage_log component=Hostwide OR component=IOstats) OR (sourcetype=metrics_log name=*)"
+        }
+    ],
+    "objectNameList": [
+        "DM_resourcelogdata"
+    ]
+}

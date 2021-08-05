@@ -1,0 +1,183 @@
+{
+    "modelName": "DM_searchdata",
+    "displayName": "DM_searchdata",
+    "description": "",
+    "objectSummary": {
+        "Event-Based": 0,
+        "Transaction-Based": 0,
+        "Search-Based": 1
+    },
+    "objects": [
+        {
+            "objectName": "DM_searchdata",
+            "displayName": "DM_searchdata",
+            "parentName": "BaseSearch",
+            "comment": "",
+            "fields": [
+                {
+                    "fieldName": "_time",
+                    "owner": "DM_searchdata",
+                    "type": "timestamp",
+                    "fieldSearch": "_time=*",
+                    "required": true,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "action",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "action",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "user",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "search_id",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "search_id",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "total_run_time",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "total_run_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.app",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.app",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.label",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.label",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.type",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.type",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.user",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.user",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.written_mb",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.written_mb",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.sid",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.sid",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.pct_cpu",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.read_mb",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.read_mb",
+                    "comment": ""
+                }
+            ],
+            "calculations": [],
+            "constraints": [],
+            "lineage": "DM_searchdata",
+            "baseSearch": "index=pfc (sourcetype=audit_log \"user\") OR (sourcetype=resource_usage_log component=PerProcess) OR (sourcetype=splunkd_log \"knowledge_bundle_size\") OR sourcetype=search_log"
+        }
+    ],
+    "objectNameList": [
+        "DM_searchdata"
+    ]
+}
