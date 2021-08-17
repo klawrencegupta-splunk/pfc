@@ -1,9 +1,9 @@
 1.0.9 release notes
 
-*added lookup for Eventtypes extended explanations
-*fixed HT/NoHT logic on Landing Page & normalized Column names
-*added new panel to Splunk Search Analysis for more context on skipped searches eligible/dispatched averages
-*added new Summary PDF Report
+** added lookup for Eventtypes extended explanations
+** fixed HT/NoHT logic on Landing Page & normalized Column names
+** added new panel to Splunk Search Analysis for more context on skipped searches eligible/dispatched averages
+** added new Summary PDF Report
 
 #eventtypes.csv
 eventtype_desc_name, eventtype
@@ -13,7 +13,7 @@ eventtype_desc_name, eventtype
 "Splunk Broken Pipes - the TcpInput processor is reporting TCP ingest problems", tcpinputproc_broken_pipes
 "Splunk Time Skew Found - the NTP timingis out of sync between the search and indexer tier", time_skew_found
 
-Summary Report
+Summary Report Contents
 
 #SH/Peers/Forwarders/Indexes
 
