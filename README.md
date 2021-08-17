@@ -1,9 +1,9 @@
 1.0.9 release notes
 
-** added lookup for Eventtypes extended explanations
-** fixed HT/NoHT logic on Landing Page & normalized Column names
-** added new panel to Splunk Search Analysis for more context on skipped searches eligible/dispatched averages
-** added new Summary PDF Report
+* added lookup for Eventtypes extended explanations
+* fixed HT/NoHT logic on Landing Page & normalized Column names
+* added new panel to Splunk Search Analysis for more context on skipped searches eligible/dispatched averages
+* added new Summary PDF Report
 
 #eventtypes.csv
 eventtype_desc_name, eventtype
