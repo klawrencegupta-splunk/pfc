@@ -1,3 +1,24 @@
+1.1.0_version notes
+
+* Added tabs.css 
+--> for formatting only to _self panes
+* Added splunkbase_app_stats_small.csv from Splunkbase pull of apps/versions and support status
+--> Gives a detailed table now of all apps their installed version vs the latest splunk version and the last know support status
+* Added app.conf ingest stanzas for installed app version and for comparison to Splunkbase
+
+* #Create Lookup JS fix
+Add the following the create lookup button to also reload the dashboard after the creations of the lookup is clicked.
+
+require([
+    'jquery',
+    'splunkjs/mvc/simplexml/ready!'
+], function($){
+        $('#refresh').on("click",function(){
+                setTimeout("location.reload();", 0);
+        });
+});
+
+
 1.0.9 release notes
 
 * added lookup for Eventtypes extended explanations
