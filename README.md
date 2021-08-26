@@ -1,3 +1,22 @@
+1.1.1 notes
+
+added the following as alignment from SplunkCloud Global Monitoring Console
+
+Landing Page
+# of Users found total & per day
+	| tstats prestats=true summariesonly=false allow_old_summaries=false dc("DM_searchdata.user") as "Distinct Count of user" FROM datamodel=DM_searchdata.DM_searchdata WHERE nodename=DM_searchdata | stats dedup_splitvals=t dc(DM_searchdata.user) AS "Distinct Count of user" | fillnull "Distinct Count of user" | fields + "#Users Found"
+       
+# UF versions - pie chart
+    index=pfc  "uf" OR "fwd" OR "universal" NOT sourcetype=XML* fwdType=uf | stats count by version
+
+Search Activity
+# of DM by app, user
+    index=pfc sourcetype="audit_log" savedsearch_name="_ACCELERATE_DM*" | stats dc(savedsearch_name)
+
+Splunk Operations
+# index activity in terms of sizes (metrics.log)
+    index=pfc sourcetype="metrics_log" group=per_index_thruput | eval gb=round(kb/1024/1024,2) | stats sum(gb) AS gb by series | where gb>0
+
 1.1.0_version notes
 
 * Added tabs.css 
