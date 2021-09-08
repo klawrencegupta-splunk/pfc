@@ -1,3 +1,12 @@
+Working Build -- 1.1.5 version notes
+
+* CSS style & color is now consistent across all tables & all views
+* additional documentation for GDI added
+* UF distribution by major version + bar chart
+* resource usage table uses icons green checkbox/red X for status instead of conditional cell color
+* splunk queue blocks drilldown uses a column chart + overlay 
+* search analysis view restructured & drilldown for table view fixed + search count added
+
 1.1.1 notes
 
 added the following as alignment from SplunkCloud Global Monitoring Console
