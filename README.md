@@ -1,7 +1,7 @@
 1.1.6 motes
 
-**Fixed Style sheet for hover over to be readable colors
-**
+**Fixed Style sheet for hover over to be readable colors**
+
 <style>
  .table th {
           background-image: linear-gradient(to bottom, #34495E, #34495E) !important;
@@ -20,6 +20,7 @@
         color: #00000 !important;
       }
 </style>
+
 
 
 **s3.py**
