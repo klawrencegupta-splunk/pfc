@@ -1,6 +1,6 @@
-1.1.6 motes
+1.1.6 notes
 
-**Fixed Style sheet for hover over to be readable colors**
+**Fixed css for hover over to be readable instead of black on black**
 
 <style>
  .table th {
@@ -21,7 +21,7 @@
       }
 </style>
 
-
+<p>
 
 **s3.py**
 * added prompt for bucket name
