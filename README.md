@@ -1,7 +1,7 @@
 1.1.6 motes
 
-Fixed Style sheet for hover over to be readable colors
-
+**Fixed Style sheet for hover over to be readable colors
+**
 <style>
  .table th {
           background-image: linear-gradient(to bottom, #34495E, #34495E) !important;
@@ -21,12 +21,14 @@ Fixed Style sheet for hover over to be readable colors
       }
 </style>
 
-s3.py
+
+**s3.py**
 * added prompt for bucket name
 * addedd clean_up function to remove gzip files from downloads directory
 * cleaned up print statements
 
-Summary Report
+
+**Summary Report**
 * added
 ** skipped searches
 ** dm count
