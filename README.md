@@ -1,4 +1,41 @@
-Working Build -- 1.1.5 version notes
+1.1.6 notes
+
+**Fixed css for hover over to be readable instead of black on black**
+
+<style>
+ .table th {
+          background-image: linear-gradient(to bottom, #34495E, #34495E) !important;
+          text-shadow: none !important;
+       }
+ .table th a{
+          color: white !important;
+       }
+  table tr.odd td{
+        background: #F8F9F9 !important;
+      }
+  table tr.even td{
+        background: #CACFD2 !important;
+      }
+  table tr td{
+        color: #00000 !important;
+      }
+</style>
+
+<p>
+
+**s3.py**
+* added prompt for bucket name
+* addedd clean_up function to remove gzip files from downloads directory
+* cleaned up print statements
+
+
+**Summary Report**
+* added
+** skipped searches
+** dm count
+** size of lookups
+
+1.1.5  notes
 
 * CSS style & color is now consistent across all tables & all views
 * additional documentation for GDI added
