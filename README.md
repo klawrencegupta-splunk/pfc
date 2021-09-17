@@ -1,3 +1,22 @@
+Stable Release --- 1.2 version release notes
+
+* GDI consolidated into single script (gdi.py) with prompts for user to supply either the s3 bucket or the local path where the diags are located.
+- supports s3 with boto3 + awscli configured
+- manual option will now take a local path on the Splunk instance running PFC and automate the extraction/indexing processes and restart
+
+* All Drilldown links will now auto-focus/scroll to hidden charts on all dashboards
+
+* Landing Page - UF version breakdown now includes Cribl identification
+* Splunk Operations - drilldown avaialable from Errors/Warns
+* Search Analysis
+--  added concurrency stats 
+--   added search density stats
+--   added search time-range stats
+--    search breakdown includes RT vs historical by type
+--   App List includes CPU Utilization column for sorting
+
+
+
 1.1.6 notes
 
 **Fixed css for hover over to be readable instead of black on black**
