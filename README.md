@@ -1,4 +1,7 @@
-Stable Release --- 1.2 version release notes
+Experimetnal Release --- 1.2.1 version release notes
+* Landing Page with experimental vCPU estimator that calculates a range of vCPU found in the deployment by looking at the min/max vCPU for the indexer and search head roles & extrapolating by the total count found in each to give a min/max range for the deployment. 
+
+Stable Release --- 1.2.0 version release notes
 
 * GDI consolidated into single script (gdi.py) with prompts for user to supply either the s3 bucket or the local path where the diags are located.
 - supports s3 with boto3 + awscli configured
