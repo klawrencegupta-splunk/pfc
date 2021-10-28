@@ -1,0 +1,259 @@
+[app/ui]
+version = 8.2.1
+modtime = 1626200971.317624000
+
+[app/launcher]
+version = 8.2.1
+modtime = 1626200971.318482000
+
+[props/systeminfo_txt/EXTRACT-splunk_etc_var]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1626212563.575185000
+
+[props/systeminfo_txt/EXTRACT-splunk_home_var]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1626212663.080883000
+
+[props/systeminfo_txt/EXTRACT-kernel_version]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1626212861.693127000
+
+[props/splunkd_log/EXTRACT-log_level%2Ccomponent]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1626963311.210687000
+
+[views/pfc_view_dm_deploymentinfo]
+owner = admin
+version = 8.2.1
+modtime = 1628025902.194202000
+
+[transforms/host_role_lkp]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628023209.445251000
+
+[datamodels/DM_deploymentInfo]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1629309485.979589000
+
+[models/DM_deploymentInfo]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1627919735.310300000
+
+[views/pfc_view_dm_systeminfo]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1627421976.686720000
+
+[datamodels/DM_resourcelogdata]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631740751.223848000
+
+[models/DM_resourcelogdata]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631740744.745210000
+
+[views/dm_resource_usage_view2]
+owner = admin
+version = 8.2.1
+modtime = 1628525926.839126000
+
+[macros/check_resource_kpis]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1627927259.296232000
+
+[datamodels/DM_splunkops]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1629309505.926451000
+
+[models/DM_splunkops]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628623299.414221000
+
+[eventtypes/incomplete_search_results]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1627933288.974596000
+
+[eventtypes/tcpinputproc_broken_pipes]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1627933299.084926000
+
+[datamodels/DM_searchdata]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631740803.895636000
+
+[models/DM_searchdata]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631740797.447685000
+
+[lookups/host_role.csv]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = nobody
+version = 8.2.1
+modtime = 1628001645.197190000
+
+[app/install/install_source_checksum]
+version = 8.2.2
+modtime = 1632337508.035770000
+
+[views/DM_splunk_ops_view1]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628526233.883765000
+
+[props/splunkd_log/EXTRACT-skew_found%2Cskew_seconds]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628187140.078593000
+
+[eventtypes/searches_skipped_true]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628187713.518999000
+
+[eventtypes/server_info_long_response_time]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628187723.749976000
+
+[eventtypes/time_skew_found]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628187733.066327000
+
+[views/landing_page]
+owner = admin
+version = 8.2.1
+modtime = 1628192245.086457000
+
+[views/dm_resource_usage_view2_clone]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628191400.661185000
+
+[views/pfc_lander]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1632498487.367994000
+
+[nav/default]
+version = 8.2.1
+modtime = 1628526054.513437000
+
+[views/splunk_preflight_check__resource_utilization]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631729436.832223000
+
+[views/splunk_preflight_check__splunk_operations]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631904521.447374000
+
+[views/splunk_preflight_check__splunk_search_analysis]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.2
+modtime = 1631906392.424560000
+
+[views/splunk_preflight_check__landingpage]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628610171.912279000
+
+[macros/create_lookup]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628783358.025455000
+
+[props/splunkd_log/EXTRACT-event_message]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1628800341.095010000
+
+[views/splunk_preflight_check__summary_report]
+owner = admin
+version = 8.2.2
+modtime = 1631546879.028383000
+
+[lookups/splunkbase_app_stats_small.csv]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1629927352.944520000

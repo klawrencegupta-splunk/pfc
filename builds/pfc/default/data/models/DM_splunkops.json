@@ -1,0 +1,167 @@
+{
+    "modelName": "DM_splunkops",
+    "displayName": "DM_splunkops",
+    "description": "",
+    "objectSummary": {
+        "Event-Based": 0,
+        "Transaction-Based": 0,
+        "Search-Based": 1
+    },
+    "objects": [
+        {
+            "objectName": "DM_splunkops",
+            "displayName": "DM_splunkops",
+            "parentName": "BaseSearch",
+            "comment": "",
+            "fields": [
+                {
+                    "fieldName": "_time",
+                    "owner": "DM_splunkops",
+                    "type": "timestamp",
+                    "fieldSearch": "_time=*",
+                    "required": true,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "component",
+                    "owner": "DM_splunkops",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "component",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host_short_name",
+                    "owner": "DM_splunkops",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host_short_name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "log_level",
+                    "owner": "DM_splunkops",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "log_level",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "blocked",
+                    "owner": "DM_splunkops",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "blocked",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "skipped",
+                    "owner": "DM_splunkops",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "skipped",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "event_message",
+                    "owner": "DM_splunkops",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "event_message",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "host",
+                            "owner": "DM_splunkops",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "host",
+                            "comment": "",
+                            "lookupOutputFieldName": "host"
+                        },
+                        {
+                            "fieldName": "role",
+                            "owner": "DM_splunkops",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "role",
+                            "comment": "",
+                            "lookupOutputFieldName": "role"
+                        },
+                        {
+                            "fieldName": "customer",
+                            "owner": "DM_splunkops",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "customer",
+                            "comment": "",
+                            "lookupOutputFieldName": "customer"
+                        }
+                    ],
+                    "calculationType": "Lookup",
+                    "lookupName": "host_role_lkp",
+                    "comment": "",
+                    "lookupInputs": [
+                        {
+                            "inputField": "host_short_name",
+                            "lookupField": "host_short_name"
+                        }
+                    ],
+                    "owner": "DM_splunkops",
+                    "calculationID": "nt64f2f52o",
+                    "editable": true
+                }
+            ],
+            "constraints": [],
+            "lineage": "DM_splunkops",
+            "baseSearch": "index=pfc sourcetype=splunkd_log OR sourcetype=metrics_log"
+        }
+    ],
+    "objectNameList": [
+        "DM_splunkops"
+    ]
+}

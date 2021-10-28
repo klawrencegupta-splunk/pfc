@@ -1,0 +1,340 @@
+<form stylesheet="tabs.css">
+  <label>Splunk Pre-Flight Check - Splunk Search Analysis</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="field1">
+      <label>Time Range</label>
+      <default>
+        <earliest>0</earliest>
+        <latest></latest>
+      </default>
+    </input>
+  </fieldset>
+  <row id="tabs">
+    <panel>
+      <html> 
+      <ul id="tabs" class="nav nav-tabs"> 
+      <li> <a href="/app/pfc/pfc_lander" class="toggle-tab" data-toggle="tab">Landing Page</a> </li> 
+      <li> <a href="/app/pfc/splunk_preflight_check__resource_utilization" class="toggle-tab" target="_self">Resource Usage</a> </li>  
+      <li> <a href="/app/pfc/splunk_preflight_check__splunk_operations" class="toggle-tab" data-toggle="tab" target="_self">Splunk Operations</a> </li> 
+      <li class="active"> <a href="/app/pfc/splunk_preflight_check__splunk_search_analysis" class="toggle-tab" data-toggle="tab" target="_self">Splunk Search Analysis</a> </li> 
+       <li> <a href="/app/pfc/splunk_preflight_check__summary_report" class="toggle-tab" data-toggle="tab" target="_self">Splunk PFC Summary Report</a> </li> </ul>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel id="deploymentinfo">
+      <html>
+      <style>
+          #deploymentinfo{
+            width:65% !important; 
+            height:200px !important;
+            border-radius:15px;
+            border-width: 1px;
+            }
+          #a2{
+            width:100% !important;
+          }
+          #concurrency{
+            width:35% !important; 
+            border-radius:15px;
+            border-width: 1px;
+            }
+          #a1{
+            width:100% !important;
+          }  
+          #drilldown_focus_element{
+            width:100% !important;
+          }
+        </style>
+        </html>
+      <single>
+        <title># of Skipped search events found</title>
+        <search>
+          <query>index=pfc eventtype="searches_skipped_true"| stats count by eventtype | table count</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="height">75</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0xdc4e41","0x3c444d"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+      <single>
+        <title># of Splunk Apps</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false count as "Count of DM_searchdata" FROM datamodel=DM_searchdata.DM_searchdata WHERE nodename=DM_searchdata BY "DM_searchdata.data.search_props.app" | stats dedup_splitvals=t count AS "Count of DM_searchdata" by DM_searchdata.data.search_props.app | sort limit=10000 "Count of DM_searchdata" | fields - _span | rename "DM_searchdata.data.search_props.app" as "data.search_props.app" | fillnull "Count of DM_searchdata" | fields + "data.search_props.app" | sort +"data.search_props.app" | stats dc("data.search_props.app") AS "App Count"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="height">75</option>
+        <option name="rangeColors">["0x006d9c","0x3c444d"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+        <drilldown>
+          <condition field="data.search_props.app">
+            <set token="tok_cell">$click.value$</set>
+          </condition>
+        </drilldown>
+      </single>
+      <single>
+        <title># Data Models</title>
+        <search>
+          <query>index=pfc sourcetype="audit_log" savedsearch_name="_ACCELERATE_DM*" | stats dc(savedsearch_name)</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="height">75</option>
+        <option name="rangeColors">["0x3F8AC1","0x3c444d"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+        <drilldown>
+          <condition field="data.search_props.app">
+            <set token="tok_cell">$click.value$</set>
+          </condition>
+        </drilldown>
+      </single>
+      <single>
+        <title># Average Searches per Day</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false dc("DM_searchdata.data.search_props.sid") as "Distinct Count of data.search_props.sid" FROM datamodel=DM_searchdata.DM_searchdata WHERE nodename=DM_searchdata BY _time span=1d DM_searchdata.host_short_name | eval "DM_searchdata.data.search_props.app"='DM_searchdata.data.search_props.app', host_short_name='DM_searchdata.host_short_name' | eval _time='_time' | timechart dedup_splitvals=t dc(DM_searchdata.data.search_props.sid) AS dc_sids span=1d | where dc_sids&gt;100 | stats avg(dc_sids) AS "Average Searches per day" | eval "Average Searches per day"=round('Average Searches per day',0)</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="rangeColors">["0x006d9c","0x3c444d"]</option>
+        <option name="height">75</option>
+        <option name="rangeValues">[50000]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+      <single>
+        <title>Total Lookup Size in MB</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false max("DM_searchdata.size") as "Max of lookup_table_size" FROM datamodel=DM_searchdata.DM_searchdata WHERE nodename=DM_searchdata BY "DM_searchdata.table" DM_searchdata.host_short_name | eval "DM_searchdata.data.search_props.app"='DM_searchdata.data.search_props.app', host_short_name='DM_searchdata.host_short_name'  | stats dedup_splitvals=t max(DM_searchdata.size) AS lookup_table_size by "DM_searchdata.table" | eval lookup_table_size_mb=round(lookup_table_size/1024/1024,1) | stats sum(lookup_table_size_mb)</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorMode">none</option>
+        <option name="height">75</option>
+        <option name="numberPrecision">0.00</option>
+        <option name="rangeColors">["0x3F8AC1","0x3c444d"]</option>
+        <option name="rangeValues">[5000]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+      <chart>
+        <title>Count of searches by type</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false dc("DM_searchdata.data.search_props.sid") as "Distinct Count of data.search_props.sid" FROM datamodel=DM_searchdata.DM_searchdata WHERE nodename=DM_searchdata BY "DM_searchdata.data.search_props.mode", "DM_searchdata.data.search_props.type" | eval "DM_searchdata.data.search_props.type"='DM_searchdata.data.search_props.type', "data.search_props.mode"='DM_searchdata.data.search_props.mode', "DM_searchdata.data.search_props.type"=mvappend('DM_searchdata.data.search_props.type',"total") | mvexpand DM_searchdata.data.search_props.type | chart dedup_splitvals=t limit=101 useother=t dc(DM_searchdata.data.search_props.sid) AS "Distinct Count of data.search_props.sid" by data.search_props.mode DM_searchdata.data.search_props.type | sort -"Distinct Count of data.search_props.sid"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="height">350</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.size">medium</option>
+        <option name="trellis.splitBy">data.search_props.mode</option>
+        <drilldown>
+          <condition field="host_short_name">
+            <set token="tok_cell">$click.value$</set>
+          </condition>
+        </drilldown>
+      </chart>
+      <table>
+        <title>!! Drilldown by AppId to see detailed search usage information</title>
+        <search>
+          <query>index=pfc sourcetype=app_conf 
+| rex field=app_conf_name "(?&lt;appid&gt;.+)\/\w+" 
+| stats max(version) AS installed_version by appid 
+| lookup splunkbase_app_stats_small.csv appid OUTPUT title support version 
+| rename version AS latest_splunk_base_version 
+| append [search index=pfc sourcetype=resource_usage_log | rename data.search_props.app AS appid | stats max(data.pct_cpu) AS cpu dc(data.search_props.sid) AS search_count by appid] 
+| stats max(cpu) AS "CPU Utilization" max(installed_version) AS "Installed Version" max(search_count) AS "Search Count" max(latest_splunk_base_version) AS "Latest SplunkBase version" last(support) AS "Support Status" last(title) AS "Title" by appid | rename appid AS "AppId" | sort -"Search Count" |table AppId "Title" "Installed Version" "Latest SplunkBase version" "Support Status" "Search Count" "CPU Utilization"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">25</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <condition field="AppId">
+            <set token="tok_cell">$click.value$</set>
+            <link>#drilldown_focus_element</link>
+          </condition>
+        </drilldown>
+      </table>
+    </panel>
+    <panel id="concurrency">
+      <single>
+        <title>Search Concurrency Stats</title>
+        <search>
+          <query>index=pfc group=search_concurrency active_hist_searches&gt;1 NOT sourcetype=systeminfo_txt | stats avg(active_*_searches) AS avg_active_*_searches perc95(active_*_searches) AS p95_active_*_searches max(active_*_searches) AS max_active_*_searches 
+| rename avg_active_hist_searches AS "Average Historical Search Concurrency" 
+| rename avg_active_realtime_searches AS "Average Realtime Search Concurrency" 
+| rename p95_active_hist_searches AS "p95 Historical Search Concurrency" 
+| rename p95_active_realtime_searches AS "p95 Realtime Search Concurrency" 
+| rename max_active_hist_searches AS "Max Historical Search Concurrency" 
+| rename max_active_realtime_searches AS "Max Realtime Search Concurrency" 
+| eval "Average Historical Search Concurrency"=round('Average Historical Search Concurrency',1)  
+| eval "Average Realtime Search Concurrency"=round('Average Realtime Search Concurrency',1)
+| eval "p95 Historical Search Concurrency"=round('p95 Historical Search Concurrency',1)
+| eval "p95 Realtime Search Concurrency"=round('p95 Realtime Search Concurrency',1)
+| eval "Max Historical Search Concurrency"=round('Max Historical Search Concurrency',1)
+| eval "Max Realtime Search Concurrency"=round('Max Realtime Search Concurrency',1)</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="height">638</option>
+        <option name="trellis.enabled">1</option>
+        <option name="trellis.size">large</option>
+      </single>
+      <chart>
+        <title>Search Density Stats</title>
+        <search>
+          <query>
+            <![CDATA[index=pfc sourcetype=audit_log action=search user=* user!=splunk-system-user search_id=* info=completed 
+| eval sparseness=(event_count/scan_count)*100, range=case((sparseness<=100 AND sparseness>10),"Dense - 10%",(sparseness<=10 AND sparseness>1),"Sparse - 1%",(sparseness<=1),"Rare - .01%",1=1,"N/A - Leading Pipe Searches")
+| stats count by range
+| eventstats sum(count) as perc
+| eval perc=round(count*100/perc,2)
+| sort - perc]]>
+          </query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+      <chart>
+        <title>Search Time Range Distribution</title>
+        <search>
+          <query>
+            <![CDATA[index=pfc sourcetype=audit_log search_id!="'rsa_*" search_id!="'RemoteStorageRetrieveBuckets_*" search_id!="'searchparsetmp_*" search_id!="'remote_*" search_id=* (info=completed OR info=cancelled) NOT mcatalog 
+| rex field=search_et "'?(?<start_time>[^']+)'?" 
+| rex field=search_lt "'?(?<end_time>[^']+)'?"  
+| eval range=if(start_time=="N/A","All Time", (end_time-start_time)/86400)
+| eval search_range_in_days=case(range=="All Time","ALL TIME", range<1,"0-1", range>=1 AND range<=7,"1-7", range>7 AND range<=14,"7-14", range>14 AND range<21,"14-21", range>=21 AND range<90,"21-90", range>90,"90+") 
+| eval search_range_in_days=if(match(search, "^[\s\']*\|"), "ALL TIME W/LEADING PIPE", 'search_range_in_days')
+| stats count by search_range_in_days 
+| sort search_range_in_days 
+| eventstats sum(count) as perc 
+| eval perc=round(count*100/perc,2) 
+| eventstats sum(count) as perc 
+| eval perc=round(count*100/perc,2) 
+| eval status=if((search_range_in_days="90+" OR search_range_in_days="ALL TIME") AND perc>20,"High Search Periodicity Over 90 Days","OK")]]>
+          </query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel id="a2">
+      <html depends="$alwaysHideCSSStyle$">
+    <style>
+       .table th {
+          background-image: linear-gradient(to bottom, #34495E, #34495E) !important;
+          text-shadow: none !important;
+       }
+       .table th a{
+          color: white !important;
+       }
+      table tr.odd td{
+        background: #F8F9F9 !important;
+      }
+      table tr.even td{
+        background: #CACFD2 !important;
+      }
+      table tr td{
+        color: #00000 !important;
+      }
+    </style>
+  </html>
+    </panel>
+  </row>
+  <row depends="$tok_cell$">
+    <panel id="drilldown_focus_element">
+      <title>Splunk Search Analysis</title>
+      <chart>
+        <title>$tok_cell$ - CPU Activity</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false sum("DM_searchdata.data.pct_cpu") as "Sum of data.pct_cpu" FROM datamodel=DM_searchdata.DM_searchdata WHERE (nodename=DM_searchdata "DM_searchdata.host_short_name"="*") BY "DM_searchdata.host_short_name", "DM_searchdata.data.search_props.app" | eval "DM_searchdata.data.search_props.app"='DM_searchdata.data.search_props.app', host_short_name='DM_searchdata.host_short_name' | rename "DM_searchdata.data.search_props.app" AS data.search_props.app | search data.search_props.app=$tok_cell$ | chart dedup_splitvals=t limit=100 useother=t sum(DM_searchdata.data.pct_cpu) AS "Sum of data.pct_cpu" by host_short_name data.search_props.app |</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.chart.showDataLabels">minmax</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.legend.placement">top</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <unset token="tok_sourcetype"></unset>
+        </drilldown>
+      </chart>
+      <table>
+        <title>$tok_cell$ - CPU App Label</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false max("DM_searchdata.data.pct_cpu") as "Max of data.pct_cpu" FROM datamodel=DM_searchdata.DM_searchdata WHERE (nodename=DM_searchdata "DM_searchdata.host_short_name"="*" DM_searchdata.data.pct_cpu="*") BY "DM_searchdata.data.search_props.app", "DM_searchdata.data.search_props.label" DM_searchdata.host_short_name | search DM_searchdata.data.search_props.app=$tok_cell$
+| eval "DM_searchdata.data.search_props.app"='DM_searchdata.data.search_props.app', host_short_name='DM_searchdata.host_short_name' 
+| stats dedup_splitvals=t max(DM_searchdata.data.pct_cpu) AS "Max of data.pct_cpu" by DM_searchdata.data.search_props.app, DM_searchdata.data.search_props.label 
+| sort limit=100 DM_searchdata.data.search_props.app 
+| fields - _span 
+| rename "DM_searchdata.data.search_props.app" as "data.search_props.app", "DM_searchdata.data.search_props.label" as "data.search_props.label"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <unset token="tok_sourcetype"></unset>
+        </drilldown>
+      </table>
+      <chart>
+        <title>$tok_cell$ - Reads/Writes MB</title>
+        <search>
+          <query>| tstats prestats=true summariesonly=false allow_old_summaries=false sum("DM_searchdata.data.read_mb") as "Sum of data.read_mb", sum("DM_searchdata.data.written_mb") as "Sum of data.written_mb" FROM datamodel=DM_searchdata.DM_searchdata WHERE (nodename=DM_searchdata "DM_searchdata.host_short_name"="*") BY "DM_searchdata.host_short_name", "DM_searchdata.role", "DM_searchdata.data.search_props.app" | eval "DM_searchdata.data.search_props.app"='DM_searchdata.data.search_props.app', host_short_name='DM_searchdata.host_short_name'| rename "DM_searchdata.data.search_props.app" AS data.search_props.app | search data.search_props.app=$tok_cell$ | chart sum(DM_searchdata.data.read_mb) AS "Sum of data.read_mb" sum(DM_searchdata.data.written_mb) AS "Sum of data.written_mb" over "DM_searchdata.role"  by   host_short_name</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <unset token="tok_sourcetype"></unset>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+</form>

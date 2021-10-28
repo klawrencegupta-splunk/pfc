@@ -1,0 +1,6 @@
+eventtype_desc_name, eventtype
+"Incomplete Search Results - search requests from indexers were incomplete", incomplete_search_results
+"Searches were skipped - 1 more more scheduled jobs were skipped", searches_skipped_true
+"Splunk REST API - the /server/info is taking a long time to respond", server_info_long_response_time
+"Splunk Broken Pipes - Ingest Issues -the TcpInput processor is reporting broken TCP pipes", tcpinputproc_broken_pipes
+"Splunk Time Skew Found - the NTP timing out of sync between the search and indexer tier", time_skew_found

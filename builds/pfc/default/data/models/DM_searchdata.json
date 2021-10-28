@@ -1,0 +1,346 @@
+{
+    "modelName": "DM_searchdata",
+    "displayName": "DM_searchdata",
+    "description": "",
+    "objectSummary": {
+        "Event-Based": 0,
+        "Transaction-Based": 0,
+        "Search-Based": 1
+    },
+    "objects": [
+        {
+            "objectName": "DM_searchdata",
+            "displayName": "DM_searchdata",
+            "parentName": "BaseSearch",
+            "comment": "",
+            "fields": [
+                {
+                    "fieldName": "_time",
+                    "owner": "DM_searchdata",
+                    "type": "timestamp",
+                    "fieldSearch": "_time=*",
+                    "required": true,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "action",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "action",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "user",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "search_id",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "search_id",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "total_run_time",
+                    "owner": "DM_searchdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "total_run_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.app",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.app",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.label",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.label",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.type",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.type",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.user",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.user",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.written_mb",
+                    "owner": "DM_searchdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.written_mb",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.sid",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.sid",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "DM_searchdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.pct_cpu",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.read_mb",
+                    "owner": "DM_searchdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.read_mb",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host_short_name",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host_short_name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "app",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "app",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "table",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "lookup_table",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "size",
+                    "owner": "DM_searchdata",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "lookup_table_size",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "data.search_props.mode",
+                    "owner": "DM_searchdata",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data.search_props.mode",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "search_func",
+                            "owner": "DM_searchdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "search_func",
+                            "comment": ""
+                        },
+                        {
+                            "fieldName": "search_ms",
+                            "owner": "DM_searchdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "search_ms",
+                            "comment": ""
+                        }
+                    ],
+                    "inputField": "_raw",
+                    "calculationID": "cbytjczyb2a",
+                    "owner": "DM_searchdata",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Rex",
+                    "expression": "\\w+\\s\\W\\s+(?<search_func>.+)\\stook\\s(?<search_ms>\\d+)\\s"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "host_short_name",
+                            "owner": "DM_searchdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "host_short_name",
+                            "comment": "",
+                            "lookupOutputFieldName": "host_short_name"
+                        },
+                        {
+                            "fieldName": "role",
+                            "owner": "DM_searchdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "role",
+                            "comment": "",
+                            "lookupOutputFieldName": "role"
+                        },
+                        {
+                            "fieldName": "customer",
+                            "owner": "DM_searchdata",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "customer",
+                            "comment": "",
+                            "lookupOutputFieldName": "customer"
+                        }
+                    ],
+                    "calculationType": "Lookup",
+                    "lookupName": "host_role_lkp",
+                    "comment": "",
+                    "lookupInputs": [
+                        {
+                            "inputField": "host",
+                            "lookupField": "host"
+                        }
+                    ],
+                    "owner": "DM_searchdata",
+                    "calculationID": "my0488ipku",
+                    "editable": true
+                }
+            ],
+            "constraints": [],
+            "lineage": "DM_searchdata",
+            "baseSearch": "index=pfc (sourcetype=audit_log \"user\") OR (sourcetype=resource_usage_log component=PerProcess) OR (sourcetype=splunkd_log \"knowledge_bundle_size\") OR sourcetype=search_log"
+        }
+    ],
+    "objectNameList": [
+        "DM_searchdata"
+    ]
+}
