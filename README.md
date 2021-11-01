@@ -1,4 +1,22 @@
-Experimetnal Release --- 1.2.1 version release notes
+Release 1.2.2 notes
+
+Bug Fixes
+-GDI.py
++ added root user check 
++ file check the .gzip files to ensure they aren't corrupted before ingest
++ add environment variable checks & print out
++ fixed the trailing slash issue (with input validation)
++ added functionality for passing manual + local_path arguments from the CLI for unprompted/automated ingest
+
+Landing Page
++ validated drilldown matches count (different sources)
++ layout changes for UF breakdown
++ Clarify that the Create Lookup need only be done once 
++ Fix vCPU table
++ HF role identification - modify macro for HF identification *need a diag (sloppy match but should work)
++ verified consistent navigation across all panes
+
+Experimental Release --- 1.2.1 version release notes
 * Landing Page with experimental vCPU estimator that calculates a range of vCPU found in the deployment by looking at the min/max vCPU for the indexer and search head roles & extrapolating by the total count found in each to give a min/max range for the deployment. 
 
 Stable Release --- 1.2.0 version release notes
