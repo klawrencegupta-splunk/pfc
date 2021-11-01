@@ -1,5 +1,0 @@
-<nav search_view="search">
-  <view name="pfc_lander" default='true' />
-  <view name="search" />
-  <view name="dashboards" />
-</nav>

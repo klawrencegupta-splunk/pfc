@@ -21,22 +21,22 @@ def get_user():
        quit()
 
 #Checks that the diag files available are not corrupted
-def check_files(local_path, fname):
+def check_files(local_path):
+    scandir_iterator = os.scandir(local_path)
     for item in scandir_iterator:
         if os.path.isfile(item.path):
-           fname = item.name
-           if fname.endswith(".gz"):
-              fname = local_path + fname
-              print("Checking diag files for corruption: ")
-              print(fname)
-              with gzip.open(fname) as g:
-                 try:
-                     while g.read(1024 * 1024):
+            fname = item.name
+            if fname.endswith(".gz"):
+                fname = local_path + fname
+                print("Checking diag files for corruption: ")
+                print(fname)
+                with gzip.open(fname) as g:
+                     try:
+                       while g.read(1024 * 1024):
                            pass
-                 except IOError as e:
-                     print(fname + "  is Corrupted! please remove from the directory and re-run the gdi.py", e)
-                     quit()
-
+                     except IOError as e:
+                           print("Corrupted!", e)
+                           quit()
 #Find all the diag files in the S3 Bucket name (provided by the user) and downloads them to the PFC staging directory
 def sync_s3_folder(bucket_name):
     s3 =    boto3.client("s3")
@@ -52,35 +52,36 @@ def sync_s3_folder(bucket_name):
            print("Files Downloaded\n")
            print(download_to)
 
-#Find the diag files in the local path provided & copy to the PFC app path
-def sync_manual_gdi(local_path,fname):
+def sync_manual_gdi(local_path, splunk_path, fname):
+    local_files = local_path + fname
+    print("Synced files from:   " + local_files)
+    pfc_path = splunk_path + fname
+    print("to: " + pfc_path)
+    shutil.copy(local_files, pfc_path)
+    print(local_files)
+    print(pfc_path)
+    
+#untar function
+def untar(fname,splunk_path,full_data_path):
     if fname.endswith(".gz"):
-       local_file = local_path + fname
-       pfc_path = splunk_path + fname
-       shutil.copy(local_file, pfc_path)
-       print("Files Copied\n")
-       print(local_file)
-       print(pfc_path)
-
-#Unzip/Untar all diag files to the PFC app path
-def untar(fname,splunk_path):
-    if fname.endswith(".gz"):
+       fname = splunk_path + fname
        tar = tarfile.open(fname, "r:gz")
        tar.extractall(full_data_path)
        tar.close()
     elif fname.endswith(".tar"):
+       fname = splunk_path + fname
        tar = tarfile.open(fname, "r:")
        tar.extractall(full_data_path)
        tar.close()
-       print("Files Extracted to PFC downloads/full directory\n")
+       print("Files Extracted to PFC downloads/full directory")
        print(fname)
 
 #After the diags are extracted to the ingest directory they can be deleted to clean up space
 def clean_up(fname,splunk_path):
-    if fname.endswith(".gz"):
-       os.remove(fname)
-       print("Clean-Up -- Files Deleted\n")
-       print(fname)
+    fname = splunk_path + fname
+    os.remove(fname)
+    print("Clean-Up -- Files Deleted\n")
+    print(fname)
 
 def print_message():
     print("####")
@@ -113,11 +114,16 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
        print_message()
        prompt1=input('Which GDI Method do you want to use - s3 or manual? ').lower()
+       local_path = None
     else:
       prompt1 = sys.argv[1]
-      print(prompt1)
       local_path = sys.argv[2]
-      print(local_path)
+      if local_path[-1] == '/':
+          pass
+      else:
+          local_path=local_path+"/"
+          print("Local path is:" + local_path)
+          print(prompt1)
 
 ## S3 - checks for boto3 and then prompts for bucket name *assuming it's already been configured with the awscli ./configure command.
     if prompt1 == 's3':
@@ -136,31 +142,30 @@ if __name__ == "__main__":
            if os.path.isfile(item.path):
               fname = splunk_path+item.name
               check_files(splunk_path,fname)
-              untar(fname,splunk_path)
+              untar(fname,splunk_path,full_data_path)
               clean_up(fname,splunk_path)
+              splunk_restart()
 
     elif prompt1 == 'manual':
          if local_path is None:
             local_path = input("Diags need to be copied to the Linux instance running Splunk Pre-Flight Check. At the prompt enter the path (e.g. /home/splunker/) to the diags:")
-            print("Local path is: " + local_path)
-         else:
-            pass
-         if local_path[-1] == '/':
-            pass
-         else:
-            local_path=local_path+"/"
-         #print(os.listdir(local_path))
+            print("Local path is:" + local_path)
+            if local_path[-1] == '/':
+               pass
+            else:
+               local_path=local_path+"/"
+               print("Local path is:" + local_path)
          scandir_iterator = os.scandir(local_path)
          for item in scandir_iterator:
              if os.path.isfile(item.path):
                 fname = item.name
-                check_files(local_path,fname)
-                sync_manual_gdi(local_path,fname)
-                fname = splunk_path+item.name
-                untar(fname,splunk_path)
-                clean_up(fname,splunk_path)
+                if fname.endswith(".gz"):
+                   print("Files found: " + local_path + fname)
+                   check_files(local_path)
+                   sync_manual_gdi(local_path, splunk_path, fname)
+                   untar(fname,splunk_path,full_data_path)
+                   clean_up(fname,splunk_path)
+                   splunk_restart()
 
     else:
         print('Please enter either s3 or manual to continue') #an answer that wouldn't be yes or no
-
-    splunk_restart
