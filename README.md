@@ -1,4 +1,16 @@
-Release 1.2.2 notes
+Newest STABLE Release -- 1.2.3 version release notes
+Bug Fixes
+-GDI.py
++ added root user check 
++ file checks for the .gzip to ensure they aren't corrupted
++ added an automated mode for manual (python3 gdi.py manual <path to diags>)
++ added environment variable check functions (if the install falls outside of /opt/splunk/)
+
++ Landing Page - validate drilldown matches count (different sources)
++ Clarify that the Create Lookup can be done once 
++ Fixed vCPU table population issues *(still experimental)
++ Added HF role identification - modified create lookup macro for HF identification
++ Fixed navigation consistentcy across all panes
 
 Bug Fixes
 -GDI.py
