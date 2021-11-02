@@ -1,16 +1,17 @@
 Newest STABLE Release -- 1.2.3 version release notes
+
 Bug Fixes
 GDI.py
--- added root user check 
--- file checks for the .gzip to ensure they aren't corrupted
--- added an automated mode for manual (python3 gdi.py manual <path to diags>)
--- added environment variable check functions (if the install falls outside of /opt/splunk/)
+** added root user check 
+** file checks for the .gzip to ensure they aren't corrupted
+** added an automated mode for manual (python3 gdi.py manual <path to diags>)
+** added environment variable check functions (if the install falls outside of /opt/splunk/)
 
 Landing Page - validate drilldown matches count (different sources)
--- Clarify that the Create Lookup can be done once 
--- Fixed vCPU table population issues *(still experimental)
--- Added HF role identification - modified create lookup macro for HF identification
--- Fixed navigation consistentcy across all panes
+** Clarify that the Create Lookup can be done once 
+** Fixed vCPU table population issues *(still experimental)
+** Added HF role identification - modified create lookup macro for HF identification
+** Fixed navigation consistentcy across all panes
 
 Experimental Release --- 1.2.1 version release notes
 * Landing Page with experimental vCPU estimator that calculates a range of vCPU found in the deployment by looking at the min/max vCPU for the indexer and search head roles & extrapolating by the total count found in each to give a min/max range for the deployment. 
