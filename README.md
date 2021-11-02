@@ -1,32 +1,16 @@
 Newest STABLE Release -- 1.2.3 version release notes
 Bug Fixes
--GDI.py
-+ added root user check 
-+ file checks for the .gzip to ensure they aren't corrupted
-+ added an automated mode for manual (python3 gdi.py manual <path to diags>)
-+ added environment variable check functions (if the install falls outside of /opt/splunk/)
+GDI.py
+-- added root user check 
+-- file checks for the .gzip to ensure they aren't corrupted
+-- added an automated mode for manual (python3 gdi.py manual <path to diags>)
+-- added environment variable check functions (if the install falls outside of /opt/splunk/)
 
-+ Landing Page - validate drilldown matches count (different sources)
-+ Clarify that the Create Lookup can be done once 
-+ Fixed vCPU table population issues *(still experimental)
-+ Added HF role identification - modified create lookup macro for HF identification
-+ Fixed navigation consistentcy across all panes
-
-Bug Fixes
--GDI.py
-+ added root user check 
-+ file check the .gzip files to ensure they aren't corrupted before ingest
-+ add environment variable checks & print out
-+ fixed the trailing slash issue (with input validation)
-+ added functionality for passing manual + local_path arguments from the CLI for unprompted/automated ingest
-
-Landing Page
-+ validated drilldown matches count (different sources)
-+ layout changes for UF breakdown
-+ Clarify that the Create Lookup need only be done once 
-+ Fix vCPU table
-+ HF role identification - modify macro for HF identification *need a diag (sloppy match but should work)
-+ verified consistent navigation across all panes
+Landing Page - validate drilldown matches count (different sources)
+-- Clarify that the Create Lookup can be done once 
+-- Fixed vCPU table population issues *(still experimental)
+-- Added HF role identification - modified create lookup macro for HF identification
+-- Fixed navigation consistentcy across all panes
 
 Experimental Release --- 1.2.1 version release notes
 * Landing Page with experimental vCPU estimator that calculates a range of vCPU found in the deployment by looking at the min/max vCPU for the indexer and search head roles & extrapolating by the total count found in each to give a min/max range for the deployment. 
