@@ -8,11 +8,11 @@ Development Release -- 1.3.1 version release notes
 Pre-Production Release -- 1.3.0 version release notes
 + Admin page added 
 
-Data Model Status
-PFC Data Available by Time Frame & size on disk (MB)
-Sum (GB) by sourcetype
++ Data Model Status
++ PFC Data Available by Time Frame & size on disk (MB)
++ Sum (GB) by sourcetype
 
-done - |rest /servicesNS/nobody/-/admin/summarization/tstats:DM_pfc_DM_deploymentInfo | table eai:acl.app title summary.complete summary.size 
++ |rest /servicesNS/nobody/-/admin/summarization/tstats:DM_pfc_DM_deploymentInfo | table eai:acl.app title summary.complete summary.size 
 | append [|rest /servicesNS/nobody/-/admin/summarization/tstats:DM_pfc_DM_resourcelogdata | table eai:acl.app title summary.complete summary.size ] 
 | append [rest /servicesNS/nobody/-/admin/summarization/tstats:DM_pfc_DM_searchdata | table eai:acl.app title summary.complete summary.size ]
 | append [|rest /servicesNS/nobody/-/admin/summarization/tstats:DM_pfc_DM_splunkops | table eai:acl.app title summary.complete summary.size ]
